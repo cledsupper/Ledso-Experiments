@@ -1,0 +1,49 @@
+O que é um número negativo em binário?
+R: é o número representado em binário que seu bit último bit é 1, por exemplo:
+      0011 0010 = 50
+      1100 1101 + 1
+    = 1100 1110 = -50
+    |1|100 1110 = -50
+      1100 1110 - 1
+      1100 1101
+      0011 0010 = 50
+    ...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Não entendeu? Vejamos na prática!
+
+Um número de 1 byte (isto é, 8 bits) natural pode alcançar até 255:
+0000 0001 = 1
+0000 0010 = 2
+0000 0011 = 3
+        ...
+0111 1101 = 125
+0111 1110 = 126
+0111 1111 = 127
+1000 0000 = 128
+1000 0001 = 129
+        ...
+1111 1111 = 255
+
+Um número de 1 byte inteiro pode alcançar até +127
+0000 0001 = 1
+        ...
+0111 1111 = 127
+1000 0000 = -128
+1000 0001 = -127
+1000 0010 = -126
+1000 0011 = -125
