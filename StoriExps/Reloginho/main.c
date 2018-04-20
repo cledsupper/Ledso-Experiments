@@ -12,8 +12,8 @@
 
 #include "clock.h"
 
-static bool stop = false;
-pthread_t td_display;
+static bool stop = true;
+static pthread_t td_display;
 
 /* parâmetros serão passados via estrutura de
  * de dados para a função startDisplay() */
@@ -52,15 +52,16 @@ void *startDisplay(void *args) {
 }
 
 void setDisplay(Clock *clk) {
-  stop = true; // mandar mensagem pro display parar
-  // e agora esperaremos o display encerrar parar
-  clear();
-  move(4, 8); // vamo pra linha 4, na coluna 8
-  printw("aguarde...\n");
-  refresh(); // e mostramos o texto nesse lugar
-  pthread_join(td_display, NULL);
-  // esperar a thread encerrar
-
+  if (!stop) {
+    stop = true; // mandar mensagem pro display parar
+    // e agora esperaremos o display encerrar parar
+    clear();
+    move(4, 8); // vamo pra linha 4, na coluna 8
+    printw("aguarde...\n");
+    refresh(); // e mostramos o texto nesse lugar
+    pthread_join(td_display, NULL);
+    // esperar a thread encerrar
+  }
   clear();
   move(1, 1);
   // perguntamos ao usuário qual lugar ele quer o
