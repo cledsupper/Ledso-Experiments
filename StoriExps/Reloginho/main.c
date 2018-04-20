@@ -10,7 +10,7 @@
 #include <unistd.h>
 #include <pthread.h>
 
-#include "clock.h"
+#include "livecounter.h"
 
 static bool stop = true;
 static pthread_t td_display;
@@ -18,7 +18,7 @@ static pthread_t td_display;
 /* parâmetros serão passados via estrutura de
  * de dados para a função startDisplay() */
 struct d_args {
-  Clock *clk;
+  LiveCounter *lcounter;
   int lc[2];
 };
 
@@ -32,14 +32,14 @@ void *startDisplay(void *args) {
    * numa posição definida pelo usuário */
   WINDOW *win = newwin(3, 32, da->lc[0], da->lc[1]);
   while (!stop) {
-    int secs = (*((long*)(da->clk))/1000)%60;
-    int mins = *((long*)(da->clk))/60000;
+    int secs = (*((long*)(da->lcounter))/1000)%60;
+    int mins = *((long*)(da->lcounter))/60000;
     wclear(win);
     wprintw(win, "-------\n");
     wprintw(win, "|%02d:%02d|\n", mins,secs);
     wprintw(win, "-------\n");
     wrefresh(win);
-    move(5, 1);
+    move(5, 0);
     refresh();
     sleep(1);
     // nós estamos observando apenas uma mudança
@@ -51,7 +51,7 @@ void *startDisplay(void *args) {
   return 0;
 }
 
-void setDisplay(Clock *clk) {
+void setDisplay(LiveCounter *lcounter) {
   if (!stop) {
     stop = true; // mandar mensagem pro display parar
     // e agora esperaremos o display encerrar parar
@@ -63,10 +63,10 @@ void setDisplay(Clock *clk) {
     // esperar a thread encerrar
   }
   clear();
-  move(1, 1);
+  move(0, 0);
   // perguntamos ao usuário qual lugar ele quer o
   // reloginho :?
-  printw("Qual local posicionar o relógio? [ex: 1 2 | linha 1, coluna 2]\n");
+  printw("Qual local posicionar o relógio? [ex: 0 1 | linha 1, coluna 2]\n");
   refresh();
 
   /* vamos alocar memória para a estrutura de
@@ -77,7 +77,7 @@ void setDisplay(Clock *clk) {
   scanw("%d %d", &da->lc[0], &da->lc[1]);
   /* sim, o contador vai junto, senão startDisplay
    * vai ficar sem saber qual counter mostrar! */
-  da->clk = clk; // yeeeyy
+  da->lcounter = lcounter; // yeeeyy
 
   // pronto, é hora de mostrar o reloginho!!!
   pthread_create(&td_display, NULL, startDisplay, da);
@@ -85,10 +85,10 @@ void setDisplay(Clock *clk) {
 }
 
 int main() {
-  Clock *clk = newClock();
+  LiveCounter *lcounter = newLiveCounter();
   initscr();
   // vamos descobrir onde mostrar o relógio?
-  setDisplay(clk);
+  setDisplay(lcounter);
 
   /* menu */
   bool hide = false;
@@ -96,7 +96,7 @@ int main() {
   while (q!='q') {
     clear();
     if (!hide) {
-      move(1, 1);
+      move(0, 0);
       printw(" -- Contador --\n");
       printw("1 - Alterar posição\n");
       printw("2 - Ocultar/exibir este menu\n");
@@ -106,7 +106,7 @@ int main() {
     q = getch();
     switch(q) {
     case '1':
-      setDisplay(clk);
+      setDisplay(lcounter);
       break;
     case '2':
       hide = !hide;
@@ -114,11 +114,11 @@ int main() {
     }
   }
   stop = true;
-  move(4, 7);
-  printw("Encerrando...");
+  move(4, 5);
+  printw("encerrando...");
   refresh();
   pthread_join(td_display, NULL);
-  destroyClock(clk);
+  destroyLiveCounter(lcounter);
   endwin();
   return 0;
 }

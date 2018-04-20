@@ -1,10 +1,10 @@
-/* clock.h - contador simples que executa em segundo plano
+/* livecounter.h - contador simples que executa em segundo plano
  * Autor: Cledson Ferreira
  *
  * Este código está disponível em algum lugar em:
  * https://github.com/cledsupper/ */
-#ifndef __CLOCK_H__
-#define __CLOCK_H__
+#ifndef __LIVECOUNTER_H__
+#define __LIVECOUNTER_H__
 
 #define cn_new(TYPE, SIZE)  (TYPE*) malloc(sizeof(TYPE)*(SIZE))
 #define cn_znew(TYPE, SIZE) (TYPE*) calloc(sizeof(TYPE), (SIZE))
@@ -13,20 +13,20 @@
 #define cn_free(POINTER)    free(POINTER)
 
 /* Apenas as funões essenciais do contador
- * E é, eu coloquei o nome Clock no contador pq
+ * E é, eu coloquei o nome LiveCounter no contador pq
  * minha ideia inicialmente era ser um display
  * de relógio, mas isso exige mais trabalho, e
  * a princípio eu quero saber se as bases
  * do trocinho funcionam :? */
 
-typedef struct _Clock Clock;
+typedef struct _LiveCounter LiveCounter;
 
-Clock *newClock();
+LiveCounter *newLiveCounter();
 
-void setClock(Clock *clk, long milis);
+void setLiveCounter(LiveCounter *lcounter, long milis);
 
-void stopClock(Clock *clk);
+void stopLiveCounter(LiveCounter *lcounter);
 
-void destroyClock(Clock *clk);
+void destroyLiveCounter(LiveCounter *lcounter);
 
-#endif /* __CLOCK_H__ */
+#endif /* __LIVECOUNTER_H__ */
