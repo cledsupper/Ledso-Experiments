@@ -58,7 +58,7 @@ void setDisplay(LiveCounter *lcounter) {
     clear();
     int maxlines, maxcols;
     getmaxyx(stdscr, maxlines, maxcols);
-    move(maxlines/2, maxcols/2-10); // vamo pra linha 4, na coluna 8
+    move(maxlines/2-1, maxcols/2-4); // mover para o centro
     printw("aguarde...\n");
     refresh(); // e mostramos o texto nesse lugar
     pthread_join(td_display, NULL);
@@ -118,7 +118,7 @@ int main() {
   stop = true;
   int maxlines, maxcols;
   getmaxyx(stdscr, maxlines, maxcols);
-  move(maxlines/2, maxcols/2-13);
+  move(maxlines/2-1, maxcols/2-6);
   printw("encerrando...");
   refresh();
   pthread_join(td_display, NULL);
