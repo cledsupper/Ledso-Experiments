@@ -9,7 +9,7 @@
 int main() {
     char buf[256];
     const char *shm_name = "l3ddy"; // '-'
-    int fd = shm_open(shm_name, O_RDWR, S_IWUSR|S_IRUSR);
+    int fd = shm_open(shm_name, O_WRONLY, S_IWUSR|S_IRUSR);
     int tries=0, len=0;
     if (fd < 0) {
         perror("Erro ao abrir memória compartilhada: ");
