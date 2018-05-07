@@ -1,4 +1,7 @@
 Se usa o Ubuntu, instale os seguintes pacotes:
  * git, clang, make, libncurses5-dev
+ 
+No terminal, dentro de uma pasta de sua preferência ("Documentos" é a que eu uso), execute:
+ $ git clone --recursive https://github.com/cledsupper/Ledso-Experiments.git
 
-Entre em qualquer diretório (Correinho, Counter ou LiveCounter) e digite o comando "make" que a mágica vai acontecer.
+Depois disso, ainda no terminal, entre em qualquer diretório (Correinho, Counter ou LiveCounter) e execute o comando "make", que a mágica vai acontecer :)
