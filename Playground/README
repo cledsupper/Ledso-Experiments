@@ -1,0 +1,4 @@
+Se usa o Ubuntu, instale os seguintes pacotes:
+ * git, clang, make, libncurses5-dev
+
+Entre em qualquer diretório (Correinho, Counter ou LiveCounter) e digite o comando "make" que a mágica vai acontecer.
