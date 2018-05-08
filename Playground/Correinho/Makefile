@@ -1,14 +1,22 @@
 CC=clang
 RUNOW=./
 
-all: shm-create shm-write
+all: shm
 	$(RUNOW)shm_create &
-	sleep 1
+	usleep 500000
 	$(RUNOW)shm_write
 	# shm_create:
 
-shm-create:
-	$(CC) shm_create.c -lrt -o shm_create
+shm:
+	$(CC) shm_create.c -o shm_create -lrt
+	$(CC) shm_write.c -o shm_write -lrt
 
-shm-write:
-	$(CC) shm_write.c -lrt -o shm_write
+android: to-android
+	$(RUNOW)and_create &
+	usleep 500000
+	$(RUNOW)and_write
+	# and_create.c
+
+to-android:
+	$(CC) and_create.c -o and_create -landroid-shmem
+	$(CC) and_write.c -o and_write -landroid-shmem
