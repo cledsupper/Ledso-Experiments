@@ -41,7 +41,6 @@ int main() {
     for (tries=0; !read(fd, buf, sizeof(buf)); tries++) {
         if (tries == 60) {
             printf("\nNenhum byte encontrado na memória compartilhada :/\n");
-            close(fd);
             shm_unlink(shm_name); // remove a memória
             return 1;
         }
@@ -49,7 +48,6 @@ int main() {
     }
     printf("\nString encontrada: %s\n", buf);
     printf("\nBye bye :)\n");
-    close(fd);
     shm_unlink(shm_name); // ...
     return 0;
 }

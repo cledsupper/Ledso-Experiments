@@ -4,7 +4,6 @@
 #include <sys/ipc.h>   // ftok(), shmget()
 #include <sys/shm.h>   // shmget(), shmat(), shmdt()
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
 
 #include "l3ddy.h"
@@ -12,7 +11,7 @@
 int main() {
   key_t shm_l3ddy;
   get_key_for_l3ddy(&shm_l3ddy);
-  int shm_id = shmget(shm_l3ddy, 50, 0);
+  int shm_id = shmget(shm_l3ddy, 128, 0);
   if (shm_id == -1) {
     perror("Erro");
     return 1;
