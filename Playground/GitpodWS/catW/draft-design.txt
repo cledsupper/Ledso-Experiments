@@ -1,0 +1,18 @@
+DESIGN DA VERSÃO MÍNIMA DO SITE catW
+
+===================================
+ catW - a Wiki dos gatos        H
+
+ Wiki dos Gatos  |  Tipos de Gatos  |  Gatos e sua wiki  | Mande-me pra Wikipedia Logo | =:
+
+Tópicos principais
+
+1. Os gatos
+	1. Gatos domésticos
+	2. Gatos selvagens
+2. A beleza felina (galeria)
+3. A evolução dos gatos
+
+
+catW (c) 2019. Nenhum direito reservado :'(
+===================================
